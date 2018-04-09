@@ -8,13 +8,9 @@ contract PayCheck {
     
     mapping (address => uint) withdrawnAmounts;
     
-    function PayCheck() payable {
-        updateTotal();
-    }
+    function PayCheck() public payable { updateTotal(); }
     
-    function () payable {
-        updateTotal();
-    }
+    function () public payable { updateTotal(); }
     
     function updateTotal() internal {
         totalReceived += msg.value;
@@ -32,7 +28,7 @@ contract PayCheck {
         _;
     }
     
-    function withdraw() canWithdraw {
+    function withdraw() public canWithdraw {
         uint amountAllocated = totalReceived/employees.length;
         uint amountWithdrawn = withdrawnAmounts[msg.sender];
         uint amount = amountAllocated - amountWithdrawn;
